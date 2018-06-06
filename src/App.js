@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-require('./main.css');
-require.context('./worker/', true, /\.js$/);
+import './main.css';
+import Worker from './worker/main.worker';
 import context from './utils/context.js';
 import {loadAll, getBuffer} from './components/buffers.js';
 

@@ -1,5 +1,6 @@
 ### SublimeText ###
 *.sublime-workspace
+*.sublimea-project
 
 .idea
 
@@ -31,4 +32,4 @@ $RECYCLE.BIN/
 
 node_modules/
 .tmp
-dist
+dist/

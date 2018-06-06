@@ -13,11 +13,20 @@ module.exports = {
     hot: true
   },
 
+  cache: false,
+
   entry: ['babel-polyfill', './src/index.js'],
 
   stats: {
     colors: true,
     reasons: true
+  },
+
+  output: {
+     path: path.join(__dirname, 'dist'),
+     filename: 'bundle.js',
+     publicPath: 'http://localhost:8080/',
+     globalObject: 'this'
   },
 
   module: {
@@ -52,7 +61,18 @@ module.exports = {
         ]
       }, {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"]
+        use: [
+          'css-hot-loader',
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+        ],
+
+      }, {
+        test: /\.worker\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'worker-loader'
+        }
       }
     ]
   },
