@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import  { defaultPreset } from '../constants/preset-constants.js';
+import  defaultPreset from '../constants/preset-constants';
 
 const beatReducer = (state=defaultPreset.beat, action) => {
     if (action.type === 'SET_BEAT') {
@@ -35,8 +35,8 @@ const volumeReducer = (state=defaultPreset.volume, action) => {
 
 const accentsReducer = (state=defaultPreset.accents, action) => {
     if (action.type === 'SET_ACCENT') {
-        return state.accents.map((accent) => {
-            if (action.id === accent.id) {
+        return state.map((accent) => {
+            if (action.division === accent.division) {
                 return {...accent, ...action.payload };
             }
             return accent;

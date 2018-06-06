@@ -1,5 +1,5 @@
 import {reduce, size, forOwn, map} from 'lodash';
-import context from '../utils/context.js';
+import context from '../utils/context';
 import metronome_low from '../sounds/metronome-low.wav';
 import metronome_med from '../sounds/metronome-med.wav';
 import metronome_high from '../sounds/metronome-high.wav';

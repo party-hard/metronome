@@ -13,11 +13,8 @@ module.exports = {
     hot: true
   },
 
-<<<<<<< HEAD
   cache: false,
-=======
   devtool: 'source-map',
->>>>>>> stores and reducers
 
   entry: ['babel-polyfill', './src/index.js'],
 
