@@ -13,7 +13,11 @@ module.exports = {
     hot: true
   },
 
+<<<<<<< HEAD
   cache: false,
+=======
+  devtool: 'source-map',
+>>>>>>> stores and reducers
 
   entry: ['babel-polyfill', './src/index.js'],
 
@@ -48,7 +52,7 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-              presets: ['react', 'es2015']
+              presets: ['react', 'es2015', 'stage-0']
           }
         },
       }, {
