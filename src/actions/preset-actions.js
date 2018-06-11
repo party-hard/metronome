@@ -1,5 +1,17 @@
 import presetStore from '../stores/preset-store'
 
+export function startPreset () {
+    presetStore.dispatch({
+        type: 'START'
+    })
+}
+
+export function stopPreset () {
+    presetStore.dispatch({
+        type: 'STOP'
+    })
+}
+
 export function setBeat (beat) {
     presetStore.dispatch({
         type: 'SET_BEAT',

@@ -127,26 +127,42 @@ input[type=range]::-webkit-slider-thumb {
   margin: 0;
   padding: 0;
 }
-input[type=range][orient=vertical] {
-  transform: rotate(-90deg)
-}
-
-.accents-inputs input {
-  position: absolute;
-  left: -50%;
-  margin-left: 33px;
-  top: 26px;
-}
-.accents-inputs li {
-  position: relative;
-}
-
 .accents-labels {
-  margin-bottom: 36px;
   font-size: 10px;
   text-transform: uppercase;
   font-weight: bold;
   margin-top: 20px;
+}
+
+.accent_switch,
+.main-button {
+  background-color: #fff;
+  border: 3px solid black;
+  box-shadow: none;
+}
+
+.accent_switch:focus,
+.accent_switch:active,
+.main-button:focus,
+.main-button:active {
+  outline: none;
+}
+
+.accent_switch[data-is-on="true"],
+.accent_switch[data-is-off="true"],
+.main-button[data-is-playing="true"] {
+  background-color: #000;
+  color: #fff;
+}
+
+.main-button {
+  display: block;
+  box-sizing: content-box;
+  width: 100%;
+  padding: 20px 0;
+  font-size: 40px;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 /*

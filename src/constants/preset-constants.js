@@ -1,4 +1,4 @@
-const defaultPreset = {
+export default {
     beat: 4,
     noteValue: 4,
     volume: 1,
@@ -31,4 +31,3 @@ const defaultPreset = {
         volume: 0
     }]
 }
-export default defaultPreset;

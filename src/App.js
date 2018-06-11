@@ -1,36 +1,37 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import { Provider } from 'react-redux';
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './main.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import './main.css'
 
 
-import Worker from './worker/main.worker';
-import presetsListStore from './stores/presets-list-store';
-import Layout from './components/Layout';
+import Worker from './worker/main.worker'
+import presetsListStore from './stores/presets-list-store'
+import presetStore from './stores/preset-store'
+import Layout from './components/Layout'
 
 
 const App = () => {
   return (
-    <div className="App">
+    <div className='App'>
       <header>
-        <div className="container">
+        <div className='container'>
           Metronome
         </div>
       </header>
       <Layout/>
       <footer>
-        <div className="container">
+        <div className='container'>
           Metronome
         </div>
       </footer>
     </div>
-  );
-};
-export default App;
+  )
+}
+export default App
 
 ReactDOM.render(
-  <Provider store={presetsListStore}>
+  <Provider store={presetStore}>
     <App />
-  </Provider>, document.getElementById("content"));
+  </Provider>, document.getElementById('content'))

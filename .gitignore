@@ -33,3 +33,4 @@ $RECYCLE.BIN/
 node_modules/
 .tmp
 dist/
+tsconfig.json

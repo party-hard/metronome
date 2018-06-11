@@ -1,13 +1,11 @@
-
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux'
 import { createLogger } from 'redux-logger'
-import thunk from 'redux-thunk';
+import thunk from 'redux-thunk'
 
-import presetsListReducer from '../reducers/presets-list-reducer';
-import defaultPreset from '../constants/preset-constants';
+import presetsListReducer from '../reducers/presets-list-reducer'
+import defaultPreset from '../constants/preset-constants'
 
-const logger = createLogger();
-const middleWare = applyMiddleware(thunk, logger);
-const presetStore = createStore(presetsListReducer, [], middleWare);
+const logger = createLogger()
+const middleWare = applyMiddleware(thunk, logger)
 
-export default presetStore;
+export default createStore(presetsListReducer, [], middleWare)

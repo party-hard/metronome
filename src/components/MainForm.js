@@ -1,36 +1,32 @@
-import React, { Component } from "react";
-import formConstants from '../constants/form-constants';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import formConstants from '../constants/form-constants'
 
-import presetStore from '../stores/preset-store';
-class MainForm extends React.Component {
-    constructor (props) {
-        super(props);
-        this.state = {
-            beat: props.beat,
-            noteValue: props.noteValue,
-            bpm: props.bpm,
-            volume: props.volume,
-            accents: props.accents
-        }
-    }
+@connect((store) => {
+    return {...store}
+})
 
-    componentDidMount () {
-        presetStore.subscribe(() => {
-            console.info('state', presetStore.getState());
-            this.setState(presetStore.getState())
-        });
-    }
-
+export default class MainForm extends React.Component {
     onParamsChange (event) {
         const {name, value} = event.target
         this.props.onChange(name, value)
     }
 
-    onAccentChange (event) {
+    onAccentChange (id, value) {
         this.props.onChange('accent', {
-            division: event.target.id,
-            volume: event.target.value
+            division: id,
+            volume: value
         })
+    }
+
+    isAccentOn (volume) {
+        return !!volume
+    }
+
+    changeTrackStatus () {
+        this.props.isPlaying
+            ? this.props.onChange('status', false)
+            : this.props.onChange('status', true)
     }
 
     render () {
@@ -39,8 +35,10 @@ class MainForm extends React.Component {
             noteValue,
             bpm,
             volume,
-            accents
-        } = this.state;
+            accents,
+            isPlaying
+        } = this.props
+
         const mappedBeatRange = formConstants.beatRange.map((beat, i) => {
             return (
                 <option key={i} value={beat}>
@@ -56,18 +54,25 @@ class MainForm extends React.Component {
             )
         })
         const accentInputMapper = (accent, i) => {
-            let name = `volume_accent_${accent.division}`
+            const name = `volume_accent_${accent.division}`
+            const idOn = `${accent.division}_on`
+            const idOff = `${accent.division}_off`
             return (
                 <li key={i} className="col-sm">
-                    <input type="range"
-                            className="accent"
-                            min="0"
-                            max="100"
-                            orient="vertical"
-                            name={name}
-                            id={accent.division}
-                            onChange={this.onAccentChange.bind(this)}
-                            defaultValue={accent.volume * 100}/>
+                    <button 
+                        class="accent_switch"
+                        name={name}
+                        id={idOn}
+                        data-is-on={this.isAccentOn(accent.volume)}
+                        onClick={this.onAccentChange.bind(this, accent.division, 1)}
+                        >on</button>
+                    <button 
+                        class="accent_switch"
+                        name={name}
+                        id={idOff}
+                        data-is-off={!this.isAccentOn(accent.volume)}
+                        onClick={this.onAccentChange.bind(this, accent.division, 0)}
+                        >off</button>
                 </li>
             )
         }
@@ -80,13 +85,13 @@ class MainForm extends React.Component {
             )
         }
 
-        const mappedAccentsInputs = accents.filter((accent) =>  {
+        const filterHidden = (accent) => {
             return !accent.isHidden
-        }).map(accentInputMapper)
+        }
+
+        const mappedAccentsInputs = accents.filter(filterHidden).map(accentInputMapper)
         
-        const mappedAccentsLabels = accents.filter((accent) =>  {
-            return !accent.isHidden
-        }).map(accentLabelsMapper)
+        const mappedAccentsLabels = accents.filter(filterHidden).map(accentLabelsMapper)
         
         return (
            <div className="MainForm">
@@ -128,7 +133,7 @@ class MainForm extends React.Component {
                                name="bpm"
                                id="bpm"
                                onChange={this.onParamsChange.bind(this)}
-                               defaultValue={this.state.bpm}/>
+                               defaultValue={bpm}/>
                     </div>
                     <div className="col-sm">
                         <input type="range"
@@ -142,9 +147,16 @@ class MainForm extends React.Component {
                 </div>
                 <ul className="row accents-labels">{mappedAccentsLabels}</ul>
                 <ul className="row accents-inputs">{mappedAccentsInputs}</ul>
+                <div className="row">
+                    <div className="col-xl">
+                        <button class="main-button" 
+                                data-is-playing={isPlaying}
+                                onClick={this.changeTrackStatus.bind(this)}>
+                            {isPlaying ? "stop" : "start"}
+                        </button>
+                    </div>
+                </div>
            </div> 
-        );
+        )
     }
 }
-
-export default MainForm;

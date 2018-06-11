@@ -1,34 +1,27 @@
+import { connect } from 'react-redux'
+import React, { Component } from 'react'
+import formConstants from '../constants/form-constants'
 
-import React, { Component } from "react";
-import formConstants from '../constants/form-constants';
-
-import presetStore from '../stores/preset-store';
+import presetStore from '../stores/preset-store'
 import {
     setAccent,
     setBeat,
     setBpm,
     setNoteValue,
-    setVolume
-} from '../actions/preset-actions';
+    setVolume,
+    startPreset,
+    stopPreset
+} from '../actions/preset-actions'
 
-import MainForm from './MainForm';
+import MainForm from './MainForm'
 
-class Player extends React.Component {
-    constructor (props) {
-        super(props);
-        
-        this.state = {
-            track: props.track || presetStore.getState()
-        }
+@connect((store) => {
+    return {
+        track: store
     }
+})
 
-    componentDidMount () {
-        presetStore.subscribe(() => {
-            this.setState({
-                track: presetStore.getState()
-            })
-        });
-    }
+export default class Player extends React.Component {
 
     onParamsChange (name, value) {
         switch (name) {
@@ -47,6 +40,9 @@ class Player extends React.Component {
             case 'accent':
                 setAccent(value)
                 break
+            case 'status':
+                value ? startPreset() : stopPreset()
+                break
             default:
                 break
         }
@@ -59,7 +55,7 @@ class Player extends React.Component {
             volume,
             bpm,
             accents
-        } = this.state.track;
+        } = this.props
         return (
             <div>
                 <MainForm beat={beat}
@@ -69,8 +65,6 @@ class Player extends React.Component {
                           accents={accents}
                           onChange={this.onParamsChange}/>
             </div>
-        );
+        )
     }
 }
-
-export default Player;

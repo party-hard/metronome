@@ -1,4 +1,4 @@
-const formConstants = {
+export default  {
     beatRange: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
     noteValueRange: [{
         name: '4',
@@ -22,5 +22,3 @@ const formConstants = {
         value: 4
     } 
 }
-
-export default formConstants;
