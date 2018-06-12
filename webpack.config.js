@@ -12,21 +12,47 @@ module.exports = {
   devServer: {
     hot: true
   },
-
-  cache: false,
-  devtool: 'source-map',
-
-  entry: ['babel-polyfill', './src/index.js'],
-
   stats: {
     colors: true,
     reasons: true
   },
+  cache: false,
+  devtool: 'source-map',
+  node: {
+    fs: "empty"
+  },
+
+
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    }
+  },
+
+
+
+
+  entry: {
+    index: ['babel-polyfill', './src/index.js'],
+    vendors: [
+      "react",
+      "react-redux",
+      "redux",
+      "redux-logger",
+      "redux-thunk",
+      "react-dom",
+      "bootstrap",
+      "cuid",
+      "file-loader",
+      "lodash",
+    ]
+  },
 
   output: {
      path: path.join(__dirname, 'dist'),
-     filename: 'bundle.js',
-     publicPath: 'http://localhost:8080/',
+     filename: '[name].[hash].js',
+     chunkFilename: '[name].[chunkhash].js',
+     publicPath: '',
      globalObject: 'this'
   },
 
@@ -92,6 +118,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'auth/success.html',
       template: path.resolve(__dirname, 'src/auth', 'success.html')
+    }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery',
+      Popper: ['popper.js', 'default'],            
     })
   ]
 };
