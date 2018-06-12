@@ -125,6 +125,9 @@ module.exports = {
       'window.jQuery': 'jquery',
       Popper: ['popper.js', 'default'],            
     }),
-    new FaviconsWebpackPlugin('./src/favicon.png')
+    new FaviconsWebpackPlugin({
+      logo: './src/favicon.png',
+      inject: true
+    })
   ]
 };
