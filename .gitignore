@@ -34,3 +34,5 @@ node_modules/
 .tmp
 # dist/
 tsconfig.json
+*.map
+*.cache

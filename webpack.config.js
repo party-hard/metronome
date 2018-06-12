@@ -18,7 +18,7 @@ module.exports = {
     reasons: true
   },
   cache: false,
-  devtool: 'source-map',
+  devtool: process.env.NODE_ENV === "production" ? false : 'source-map',
   node: {
     fs: "empty"
   },
@@ -127,7 +127,8 @@ module.exports = {
     }),
     new FaviconsWebpackPlugin({
       logo: './src/favicon.png',
-      inject: true
+      inject: true,
+      persistentCache: false
     })
   ]
 };
