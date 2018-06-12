@@ -63,10 +63,9 @@ module.exports = {
         loader: 'file-loader',
         options: {
             name: '[path][name].[ext]',
-            emitFile: false
+            useRelativePath: process.env.NODE_ENV === "production"
         },
         include: [
-          path.resolve(__dirname, 'src', 'worker'),
           path.resolve(__dirname, 'src', 'sounds')
         ]
       }, {
