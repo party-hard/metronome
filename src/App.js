@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './main.css'
+import './icons/favicon.ico'
 
 
 import Worker from './worker/main.worker'
