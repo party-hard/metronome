@@ -70,6 +70,16 @@ module.exports = {
           path.resolve(__dirname, 'src', 'sounds')
         ]
       }, {
+        test: /\.(jpe?g|png|gif|ico)$/i,
+        loader: 'file-loader',
+        options: {
+          name: '[path][name].[ext]',
+          useRelativePath: process.env.NODE_ENV === "production"
+        },
+        include: [
+          path.resolve(__dirname, 'src', 'icons')
+        ]
+      }, {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
@@ -105,6 +115,9 @@ module.exports = {
     ]
   },
   plugins: [
+    new HtmlWebpackPlugin({
+       favicon: 'src/icons/favicon.ico'
+    }),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebPackPlugin({
@@ -124,11 +137,6 @@ module.exports = {
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
       Popper: ['popper.js', 'default'],            
-    }),
-    new FaviconsWebpackPlugin({
-      logo: './src/favicon.png',
-      inject: true,
-      persistentCache: false
     })
   ]
 };
