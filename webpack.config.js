@@ -34,18 +34,7 @@ module.exports = {
 
   entry: {
     index: ['babel-polyfill', './src/index.js'],
-    vendors: [
-      "react",
-      "react-redux",
-      "redux",
-      "redux-logger",
-      "redux-thunk",
-      "react-dom",
-      "bootstrap",
-      "cuid",
-      "file-loader",
-      "lodash",
-    ]
+    vendors: Object.keys(packageJSON.dependencies)
   },
 
   output: {
@@ -127,12 +116,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'auth/success.html',
       template: path.resolve(__dirname, 'src/auth', 'success.html')
-    }),
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery',
-      Popper: ['popper.js', 'default'],            
     })
   ]
 };

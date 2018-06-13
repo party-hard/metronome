@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 
-import 'bootstrap/dist/css/bootstrap.min.css'
+import 'flexboxgrid/css/flexboxgrid.min.css'
 import './main.css'
 import './icons/favicon.ico'
 
@@ -17,14 +17,18 @@ const App = () => {
   return (
     <div className='App'>
       <header>
-        <div className='container'>
-          Metronome
+        <div className='container container-fluid'>
+          <div>
+            Metronome
+          </div>
         </div>
       </header>
       <Layout/>
       <footer>
-        <div className='container'>
-          Metronome
+        <div className='container container-fluid'>
+          <div>
+            Metronome
+          </div>
         </div>
       </footer>
     </div>

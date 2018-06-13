@@ -57,14 +57,12 @@ export default class Player extends React.Component {
             accents
         } = this.props
         return (
-            <div>
-                <MainForm beat={beat}
-                          noteValue={noteValue}
-                          volume={volume}
-                          bpm={bpm}
-                          accents={accents}
-                          onChange={this.onParamsChange}/>
-            </div>
+            <MainForm beat={beat}
+                      noteValue={noteValue}
+                      volume={volume}
+                      bpm={bpm}
+                      accents={accents}
+                      onChange={this.onParamsChange}/>
         )
     }
 }

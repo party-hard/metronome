@@ -20,7 +20,7 @@ export default class Layout extends React.Component {
 
   render () {
     return (
-      <div className='Layout container'>
+      <div className='Layout container-fluid container'>
         <Player/>
       </div>
     )

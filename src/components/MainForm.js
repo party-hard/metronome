@@ -6,6 +6,7 @@ import formConstants from '../constants/form-constants'
     return {...store}
 })
 
+
 export default class MainForm extends React.Component {
     onParamsChange (event) {
         const {name, value} = event.target
@@ -58,16 +59,16 @@ export default class MainForm extends React.Component {
             const idOn = `${accent.division}_on`
             const idOff = `${accent.division}_off`
             return (
-                <li key={i} className="col-sm">
+                <li key={i} class='col-xs-3 col-sm-3 col-md-3 col-lg-3'>
                     <button 
-                        class="accent_switch"
+                        class='accent_switch'
                         name={name}
                         id={idOn}
                         data-is-on={this.isAccentOn(accent.volume)}
                         onClick={this.onAccentChange.bind(this, accent.division, 1)}
                         >on</button>
                     <button 
-                        class="accent_switch"
+                        class='accent_switch'
                         name={name}
                         id={idOff}
                         data-is-off={!this.isAccentOn(accent.volume)}
@@ -79,7 +80,7 @@ export default class MainForm extends React.Component {
 
         const accentLabelsMapper = (accent, i) => {
             return (
-                <li key={i} className="col-sm">
+                <li key={i} class='col-xs-3 col-sm-3 col-md-3 col-lg-3'>
                     {accent.name}
                 </li>
             )
@@ -94,66 +95,70 @@ export default class MainForm extends React.Component {
         const mappedAccentsLabels = accents.filter(filterHidden).map(accentLabelsMapper)
         
         return (
-           <div className="MainForm">
-                <div className="row labels">
-                    <div className="col-sm">
-                        beat
+           <div class='MainForm'>
+                <div className="form-controls-wrapper">
+                    <div class='row labels'>
+                        <div class='col-xs-3 col-sm-3 col-md-3 col-lg-3'>
+                            beat
+                        </div>
+                        <div class='col-xs-3 col-sm-3 col-md-3 col-lg-3'>
+                            note value
+                        </div>
+                        <div class='col-xs-3 col-sm-3 col-md-3 col-lg-3'>
+                            bpm: {bpm}
+                        </div>
+                        <div class='col-xs-3 col-sm-3 col-md-3 col-lg-3'>
+                            volume
+                        </div>
                     </div>
-                    <div className="col-sm">
-                        note value
+                    <div class='row'>
+                        <div class='col-xs-3 col-sm-3 col-md-3 col-lg-3'>
+                            <select name='beat'
+                                    id='beat_select'
+                                    defaultValue={beat}
+                                    onChange={this.onParamsChange.bind(this)}>
+                                {mappedBeatRange}
+                            </select>
+                        </div>
+                        <div class='col-xs-3 col-sm-3 col-md-3 col-lg-3'>
+                            <select name='noteValue'
+                                    id='noteValue'
+                                    defaultValue={noteValue}
+                                    onChange={this.onParamsChange.bind(this)}>
+                                {mappedNoteValueRange}
+                            </select>
+                        </div>
+                        <div class='col-xs-3 col-sm-3 col-md-3 col-lg-3'>
+                            <input type='range'
+                                   min='20'
+                                   max='350'
+                                   name='bpm'
+                                   id='bpm'
+                                   onChange={this.onParamsChange.bind(this)}
+                                   defaultValue={bpm}/>
+                        </div>
+                        <div class='col-xs-3 col-sm-3 col-md-3 col-lg-3'>
+                            <input type='range'
+                                   min='0'
+                                   max='100'
+                                   name='volume'
+                                   id='volume'
+                                   onChange={this.onParamsChange.bind(this)}
+                                   defaultValue={volume * 100}/>
+                        </div>
                     </div>
-                    <div className="col-sm">
-                        bpm: {bpm}
-                    </div>
-                    <div className="col-sm">
-                        volume
-                    </div>
+                    <ul class='row accents-labels'>{mappedAccentsLabels}</ul>
+                    <ul class='row accents-inputs'>{mappedAccentsInputs}</ul>
                 </div>
-                <div className="row">
-                    <div className="col-sm">
-                        <select name="beat"
-                                id="beat_select"
-                                defaultValue={beat}
-                                onChange={this.onParamsChange.bind(this)}>
-                            {mappedBeatRange}
-                        </select>
-                    </div>
-                    <div className="col-sm">
-                        <select name="noteValue"
-                                id="noteValue"
-                                defaultValue={noteValue}
-                                onChange={this.onParamsChange.bind(this)}>
-                            {mappedNoteValueRange}
-                        </select>
-                    </div>
-                    <div className="col-sm">
-                        <input type="range"
-                               min="20"
-                               max="350"
-                               name="bpm"
-                               id="bpm"
-                               onChange={this.onParamsChange.bind(this)}
-                               defaultValue={bpm}/>
-                    </div>
-                    <div className="col-sm">
-                        <input type="range"
-                               min="0"
-                               max="100"
-                               name="volume"
-                               id="volume"
-                               onChange={this.onParamsChange.bind(this)}
-                               defaultValue={volume * 100}/>
-                    </div>
-                </div>
-                <ul className="row accents-labels">{mappedAccentsLabels}</ul>
-                <ul className="row accents-inputs">{mappedAccentsInputs}</ul>
-                <div className="row">
-                    <div className="col-xl">
-                        <button class="main-button" 
-                                data-is-playing={isPlaying}
-                                onClick={this.changeTrackStatus.bind(this)}>
-                            {isPlaying ? "stop" : "start"}
-                        </button>
+                <div class="main-button-wrapper">
+                    <div class='row'>
+                        <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 '>
+                            <button class='main-button' 
+                                    data-is-playing={isPlaying}
+                                    onClick={this.changeTrackStatus.bind(this)}>
+                                {isPlaying ? 'stop' : 'start'}
+                            </button>
+                        </div>
                     </div>
                 </div>
            </div> 
