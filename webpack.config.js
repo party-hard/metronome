@@ -106,6 +106,7 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebPackPlugin({
+      favicon: "./src/icons/favicon.ico",
       template: "./src/index.html",
       filename: "./index.html"
     }),
@@ -114,6 +115,7 @@ module.exports = {
       chunkFilename: "[id].css"
     }),
     new HtmlWebpackPlugin({
+      favicon: "./src/icons/favicon.ico",
       filename: 'auth/success.html',
       template: path.resolve(__dirname, 'src/auth', 'success.html')
     })
