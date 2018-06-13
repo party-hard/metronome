@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hotOnly",
-    "build": "webpack --mode production",
-    "deploy-gh" "git push; and git subtree push --prefix dist origin gh-pages"
+    "build": "webpack --mode production"
   },
   "keywords": [],
   "author": "",
